@@ -1,0 +1,72 @@
+/**
+ * An example of how to write unit tests.
+ * Use this as a basis to build a more complete Test.cpp file.
+ * 
+ * IMPORTANT: Please write more tests - the tests here are only for example and are not complete.
+ *
+ * AUTHORS: <Please write your names here>
+ * 
+ * Date: 2021-02
+ */
+
+#include "doctest.h"
+#include "snowman.hpp"
+using namespace ariel;
+
+#include <string>
+#include <algorithm>
+using namespace std;
+
+/**
+ * Returns the input string without the whitespace characters: space, newline and tab.
+ * Requires std=c++2a.
+ */
+string nospaces(string input) {
+	std::erase(input, ' ');
+	std::erase(input, '\t');
+	std::erase(input, '\n');
+	std::erase(input, '\r');
+	return input;
+}
+
+//////////////////////// ---------------HNLRXYTB------------////////////////////////////
+TEST_CASE("Good snowman code") {
+    //Test regular snowman with diff hats.
+    CHECK(nospaces(snowman(11114411)) == nospaces("_===_\n(.,.)\n( : )\n( : )")); //Straw
+    CHECK(nospaces(snowman(21114411)) == nospaces(" ___ \n.....\n(.,.)\n( : )\n( : )")); //Mexican
+    //CHECK(nospaces(snowman(31114411)) == nospaces("  _  \n /_\ \n(.,.)\n( : )\n( : )")); //Fez
+    CHECK(nospaces(snowman(41114411)) == nospaces(" ___ \n(_*_)\n(.,.)\n( : )\n( : )")); //Russian
+    //Test regular snowman with diff noses.
+    CHECK(nospaces(snowman(12114411)) == nospaces("_===_\n(...)\n( : )\n( : )")); //Dot
+    CHECK(nospaces(snowman(13114411)) == nospaces("_===_\n(._.)\n( : )\n( : )")); //Line
+    CHECK(nospaces(snowman(14114411)) == nospaces("_===_\n(. .)\n( : )\n( : )")); //None
+    //Test different bodies.
+    CHECK(nospaces(snowman(11114412)) == nospaces("_===_\n(.,.)\n( : )\n(" ")")); //Feet
+    CHECK(nospaces(snowman(11114413)) == nospaces("_===_\n(.,.)\n( : )\n(___)")); //Flat
+    CHECK(nospaces(snowman(11114414)) == nospaces("_===_\n(.,.)\n( : )\n(   )")); //None
+    //Test different torso's
+    CHECK(nospaces(snowman(11114422)) == nospaces("_===_\n(.,.)\n(] [)\n(" ")")); //Vest
+    CHECK(nospaces(snowman(11114433)) == nospaces("_===_\n(.,.)\n(> <)\n(___)")); //Inward Arms
+    CHECK(nospaces(snowman(11114444)) == nospaces("_===_\n(.,.)\n(   )\n(   )")); //None
+    //Some random snowman
+    
+}
+
+TEST_CASE("Bad snowman code") {
+    CHECK(nospaces(snowman(41114413)) == nospaces(" ___ \n(_*_)\n(.,.)\n( : )\n( : )")); //Russian
+    CHECK(nospaces(snowman(31114411)) == nospaces(" ___ \n(_*_)\n(. .)\n( : )\n( : )")); //Russian
+    CHECK(nospaces(snowman(41114421)) == nospaces(" ___ \n(_*_)\n(.,.)\n( : )\n( _ )")); //Russian
+    CHECK(nospaces(snowman(21114411)) == nospaces(" ___ \n(_._)\n(.,.)\n( : )\n( : )")); //Russian
+
+}
+TEST_CASE("Bad input"){
+    CHECK(nospaces(snowman(1)) == nospaces("_===_"));
+    CHECK_THROWS(snowman(99999999));
+    CHECK_THROWS(snowman(24266630));
+    CHECK_THROWS(snowman(424242444)); //long input.
+    CHECK_THROWS(snowman(00000000));
+    CHECK_THROWS(snowman(444));
+
+}
+
+/* Add more test cases here */
