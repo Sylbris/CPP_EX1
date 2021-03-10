@@ -44,23 +44,29 @@ TEST_CASE("Good snowman code") {
     CHECK(nospaces(snowman(11114412)) == nospaces("_===_\n(.,.)\n( : )\n(" ")")); //Feet
     CHECK(nospaces(snowman(11114413)) == nospaces("_===_\n(.,.)\n( : )\n(___)")); //Flat
     CHECK(nospaces(snowman(11114414)) == nospaces("_===_\n(.,.)\n( : )\n(   )")); //None
-    //Test different torso's
+    //Test different torsos
     CHECK(nospaces(snowman(11114422)) == nospaces("_===_\n(.,.)\n(] [)\n(" ")")); //Vest
     CHECK(nospaces(snowman(11114433)) == nospaces("_===_\n(.,.)\n(> <)\n(___)")); //Inward Arms
     CHECK(nospaces(snowman(11114444)) == nospaces("_===_\n(.,.)\n(   )\n(   )")); //None
-    //Some random snowman
-    
+    //Test different eyes.
+    CHECK(nospaces(snowman(11224422)) == nospaces("_===_\n(o,o)\n(] [)\n(" ")")); //Vest
+    CHECK(nospaces(snowman(11334433)) == nospaces("_===_\n(0,0)\n(> <)\n(___)")); //Inward Arms
+    CHECK(nospaces(snowman(11444444)) == nospaces("_===_\n(-,-)\n(   )\n(   )")); //None
+    //Test different arms.
+    CHECK(nospaces(snowman(11221122)) == nospaces("_===_\n(o,o)\n<(] [)>\n(" ")")); //Vest
+    CHECK(nospaces(snowman(11334233)) == nospaces("_===_\n(0,0)/\n(> <)\n(___)")); //Inward Arms
+    CHECK(nospaces(snowman(11444344)) == nospaces("_===_\n(-,-)\n(   )\\n(   )")); //None
 }
 
 TEST_CASE("Bad snowman code") {
-    CHECK(nospaces(snowman(41114413)) == nospaces(" ___ \n(_*_)\n(.,.)\n( : )\n( : )")); //Russian
-    CHECK(nospaces(snowman(31114411)) == nospaces(" ___ \n(_*_)\n(. .)\n( : )\n( : )")); //Russian
-    CHECK(nospaces(snowman(41114421)) == nospaces(" ___ \n(_*_)\n(.,.)\n( : )\n( _ )")); //Russian
-    CHECK(nospaces(snowman(21114411)) == nospaces(" ___ \n(_._)\n(.,.)\n( : )\n( : )")); //Russian
+    CHECK(nospaces(snowman(41114413)) != nospaces(" ___ \n(_*_)\n(.,.)\n( : )\n( : )")); //Russian
+    CHECK(nospaces(snowman(31114411)) != nospaces(" ___ \n(_*_)\n(. .)\n( : )\n( : )")); //Russian
+    CHECK(nospaces(snowman(41114421)) != nospaces(" ___ \n(_*_)\n(.,.)\n( : )\n( _ )")); //Russian
+    CHECK(nospaces(snowman(21114411)) != nospaces(" ___ \n(_._)\n(.,.)\n( : )\n( : )")); //Russian
 
 }
 TEST_CASE("Bad input"){
-    CHECK(nospaces(snowman(1)) == nospaces("_===_"));
+    
     CHECK_THROWS(snowman(99999999));
     CHECK_THROWS(snowman(24266630));
     CHECK_THROWS(snowman(424242444)); //long input.
